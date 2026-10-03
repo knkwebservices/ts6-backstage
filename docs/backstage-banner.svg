@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="400" viewBox="0 0 1280 400">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b0f1a"/>
+      <stop offset="1" stop-color="#1a1030"/>
+    </linearGradient>
+    <radialGradient id="spot" cx="0.5" cy="0" r="1">
+      <stop offset="0" stop-color="#ffd27a" stop-opacity="0.55"/>
+      <stop offset="0.6" stop-color="#ffb347" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="#ffb347" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="curtain" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#5a0f1f"/>
+      <stop offset="0.5" stop-color="#8a1a30"/>
+      <stop offset="1" stop-color="#5a0f1f"/>
+    </linearGradient>
+    <linearGradient id="title" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#ffd27a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="400" fill="url(#bg)"/>
+  <!-- curtains -->
+  <g opacity="0.9">
+    <path d="M0 0 H150 Q120 200 160 400 H0 Z" fill="url(#curtain)"/>
+    <path d="M40 0 V400 M80 0 V400 M115 0 Q100 200 130 400" stroke="#3d0815" stroke-width="6" fill="none" opacity="0.6"/>
+    <path d="M1280 0 H1130 Q1160 200 1120 400 H1280 Z" fill="url(#curtain)"/>
+    <path d="M1240 0 V400 M1200 0 V400 M1165 0 Q1180 200 1150 400" stroke="#3d0815" stroke-width="6" fill="none" opacity="0.6"/>
+  </g>
+  <!-- spotlight cone -->
+  <path d="M560 0 L720 0 L980 400 L300 400 Z" fill="url(#spot)"/>
+  <!-- stage floor -->
+  <rect y="340" width="1280" height="60" fill="#06080f" opacity="0.7"/>
+  <!-- headset icon -->
+  <g transform="translate(250 130)" fill="none" stroke="#ffd27a" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M10 90 V70 a60 60 0 0 1 120 0 V90"/>
+    <rect x="0" y="85" width="30" height="55" rx="10" fill="#ffd27a"/>
+    <rect x="110" y="85" width="30" height="55" rx="10" fill="#ffd27a"/>
+    <path d="M125 140 q0 30 -40 30 h-15"/>
+    <circle cx="62" cy="170" r="8" fill="#ffd27a"/>
+  </g>
+  <!-- title -->
+  <text x="440" y="200" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="88" font-weight="800" fill="url(#title)" letter-spacing="2">TS6 Backstage</text>
+  <text x="444" y="252" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="30" fill="#c9cbe0">TeamSpeak 6 voice, right in your browser</text>
+  <!-- waveform -->
+  <g fill="#ffd27a" opacity="0.85">
+    <rect x="444" y="282" width="8" height="16" rx="4"/>
+    <rect x="460" y="274" width="8" height="32" rx="4"/>
+    <rect x="476" y="266" width="8" height="48" rx="4"/>
+    <rect x="492" y="276" width="8" height="28" rx="4"/>
+    <rect x="508" y="270" width="8" height="40" rx="4"/>
+    <rect x="524" y="280" width="8" height="20" rx="4"/>
+    <rect x="540" y="272" width="8" height="36" rx="4"/>
+    <rect x="556" y="282" width="8" height="16" rx="4"/>
+  </g>
+  <text x="580" y="298" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="20" fill="#8a8fb0">by K &amp; K Web Services · based on WebSpeak</text>
+</svg>
