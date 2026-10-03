@@ -36,7 +36,7 @@ test("skin catalog always includes the three protected built-ins and exposes onl
   }
 });
 
-test("invalid or disabled instance defaults safely fall back to the protected day skin", async () => {
+test("invalid or disabled instance defaults safely fall back to the protected night skin", async () => {
   const originalFetch = globalThis.fetch;
   globalThis.fetch = async () => new Response(JSON.stringify({
     defaultSkinId: "disabled-skin",
@@ -46,7 +46,7 @@ test("invalid or disabled instance defaults safely fall back to the protected da
   try {
     const skins = await listPublicSkins();
     assert.equal(skins.length, 3);
-    assert.equal(getPublicDefaultSkinId(), "builtin.light");
+    assert.equal(getPublicDefaultSkinId(), "builtin.dark");
   } finally {
     globalThis.fetch = originalFetch;
   }

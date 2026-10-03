@@ -58,10 +58,10 @@ export const BUILTIN_SKIN_CATALOG: SkinCatalogEntry[] = [
 const BUILTIN_ILLUSIA_PACKAGE_URL = "/skins/illusia-voice.wskin";
 let publicDirectoryLoaded = false;
 let publicEnabledSkinIds = new Set<string>(BUILTIN_SKIN_CATALOG.map((skin) => skin.id));
-let publicDefaultSkinId = "builtin.light";
+let publicDefaultSkinId = "builtin.dark";
 
 export function getPublicDefaultSkinId(): string {
-  return isPublicSkinEnabled(publicDefaultSkinId) ? publicDefaultSkinId : "builtin.light";
+  return isPublicSkinEnabled(publicDefaultSkinId) ? publicDefaultSkinId : "builtin.dark";
 }
 
 export function isPublicSkinEnabled(id: string): boolean {
@@ -76,7 +76,7 @@ export function getBundledSkinPackageUrl(id: string): string | null {
 export async function listPublicSkins(): Promise<SkinCatalogEntry[]> {
   publicDirectoryLoaded = false;
   publicEnabledSkinIds = new Set(BUILTIN_SKIN_CATALOG.map((skin) => skin.id));
-  publicDefaultSkinId = "builtin.light";
+  publicDefaultSkinId = "builtin.dark";
   try {
     const response = await fetch("/api/skins", { headers: { accept: "application/json" }, cache: "no-cache" });
     if (!response.ok) return BUILTIN_SKIN_CATALOG;
@@ -107,12 +107,12 @@ export async function listPublicSkins(): Promise<SkinCatalogEntry[]> {
       ...directorySkins.filter((skin) => skin.enabled).map((skin) => skin.id),
     ]);
     const requestedDefault = (payload as { defaultSkinId?: unknown }).defaultSkinId;
-    publicDefaultSkinId = typeof requestedDefault === "string" && publicEnabledSkinIds.has(requestedDefault) ? requestedDefault : "builtin.light";
+    publicDefaultSkinId = typeof requestedDefault === "string" && publicEnabledSkinIds.has(requestedDefault) ? requestedDefault : "builtin.dark";
     return [...BUILTIN_SKIN_CATALOG, ...directorySkins.filter((skin) => skin.enabled)];
   } catch {
     publicDirectoryLoaded = false;
     publicEnabledSkinIds = new Set(BUILTIN_SKIN_CATALOG.map((skin) => skin.id));
-    publicDefaultSkinId = "builtin.light";
+    publicDefaultSkinId = "builtin.dark";
     return BUILTIN_SKIN_CATALOG;
   }
 }

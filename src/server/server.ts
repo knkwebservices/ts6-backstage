@@ -144,7 +144,14 @@ export function createWebServer(options: WebServerOptions): WebServer {
       response.status(503).json({ ok: false, code: "NOT_INITIALIZED" });
       return;
     }
-    if (!joinRateLimiter.allow(request.socket.remoteAddress ?? "unknown")) {
+    // Behind a local reverse proxy (Caddy) every visitor arrives from loopback, which made all
+    // visitors share one rate-limit budget. Trust X-Forwarded-For only when the peer is loopback.
+    const socketPeer = request.socket.remoteAddress ?? "unknown";
+    const isLoopbackPeer = socketPeer === "127.0.0.1" || socketPeer === "::1" || socketPeer === "::ffff:127.0.0.1";
+    const forwardedHeader = request.headers["x-forwarded-for"];
+    const forwardedFor = (Array.isArray(forwardedHeader) ? forwardedHeader[0] : forwardedHeader)?.split(",", 1)[0]?.trim();
+    const ratePeer = isLoopbackPeer && forwardedFor ? forwardedFor : socketPeer;
+    if (!joinRateLimiter.allow(ratePeer)) {
       response.status(429).json({ ok: false, code: "RATE_LIMITED" });
       return;
     }

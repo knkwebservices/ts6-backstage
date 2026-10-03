@@ -20,7 +20,7 @@ export function getBuiltinSkinCss(theme: Exclude<ThemeMode, "system">): string {
 
 export function getStoredTheme(): ThemeMode {
   const value = typeof localStorage === "undefined" ? "" : localStorage.getItem(THEME_KEY);
-  return value === "light" || value === "dark" || value === "system" ? value : "system";
+  return value === "light" || value === "dark" || value === "system" ? value : "dark";
 }
 
 export function applyTheme(theme: ThemeMode, options: { preserveCustomSkins?: boolean } = {}): void {
