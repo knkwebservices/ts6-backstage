@@ -4,7 +4,7 @@
     <section v-if="!voiceState.connected && !voiceState.reconnecting && !voiceState.reconnectFailed" class="join-page" data-ws-part="home">
       <header class="join-header" data-ws-part="home.header">
         <div class="brand-lockup" data-ws-part="home.brand">
-          <img class="brand-mark" src="/网站图标.jpg" alt="WebSpeak" />
+          <img class="brand-mark" src="/site-icon.jpg" alt="TGSC Voice" />
           <div>
             <strong>{{ skinHomeCopy.brandName || siteName }}</strong>
             <small>{{ t('browserWorkspace') }}</small>
