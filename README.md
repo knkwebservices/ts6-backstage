@@ -1,97 +1,112 @@
-<div align="center">
-  <a id="readme-top"></a>
+<p align="center">
+  <img src="docs/backstage-banner.svg" alt="TS6 Backstage — TeamSpeak 6 voice, right in your browser" width="100%">
+</p>
 
-  <img src="./image.png" alt="WebSpeak 项目横幅" width="100%" />
+# TS6 Backstage
 
-  <h1>WebSpeak</h1>
+**Join a TeamSpeak 6 server straight from your browser — no TeamSpeak client to install.**
 
-  <p><strong>让 TeamSpeak 自然地进入浏览器。</strong></p>
-  <p>A self-hosted browser voice client for TeamSpeak 3 and TeamSpeak 6.</p>
+TS6 Backstage is a self-hosted web client and voice gateway for TeamSpeak 6 (TeamSpeak 3 works too). Share one link, and your friends can hop into your channels, talk, and chat from any modern browser on desktop or phone.
 
-  [![Latest Release](https://img.shields.io/github/v/release/EchoSixHIYA/WebSpeak-client-for-TeamSpeak?sort=semver&display_name=tag&style=flat-square&color=0f766e)](https://github.com/EchoSixHIYA/WebSpeak-client-for-TeamSpeak/releases/latest)
-  [![Docker Image](https://github.com/EchoSixHIYA/WebSpeak-client-for-TeamSpeak/actions/workflows/docker-publish.yml/badge.svg?branch=master)](https://github.com/EchoSixHIYA/WebSpeak-client-for-TeamSpeak/actions/workflows/docker-publish.yml)
-  [![License](https://img.shields.io/badge/license-AGPL--3.0--only-0f766e?style=flat-square)](./LICENSE)
-  [![GitHub Stars](https://img.shields.io/github/stars/EchoSixHIYA/WebSpeak-client-for-TeamSpeak?style=flat-square&logo=github&color=0f766e)](https://github.com/EchoSixHIYA/WebSpeak-client-for-TeamSpeak/stargazers)
-  <br />
-  [![TeamSpeak](https://img.shields.io/badge/TeamSpeak-3%20%7C%206-2580C3?style=flat-square)](https://www.teamspeak.com/)
-  [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D22.5-339933?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
-  [![Vue](https://img.shields.io/badge/Vue-3-42B883?style=flat-square&logo=vuedotjs&logoColor=white)](https://vuejs.org/)
-  [![TypeScript](https://img.shields.io/badge/TypeScript-6-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-  [![Docker](https://img.shields.io/badge/Docker-GHCR-2496ED?style=flat-square&logo=docker&logoColor=white)](https://github.com/users/EchoSixHIYA/packages/container/package/webspeak)
+It's maintained by [K & K Web Services](https://knkws.com) and runs alongside [TS6 Roadie](https://github.com/knkwebservices/ts6-roadie), our music and server-tools bot for TeamSpeak 6. Live on the **TGSC Gaming Community** server.
 
-  <p>
-    <a href="./docs/README.zh-CN.md">简体中文文档</a> ·
-    <a href="./docs/README.en.md">English documentation</a> ·
-    <a href="./docs/README.de.md">Deutsche Dokumentation</a> ·
-    <a href="./docs/README.ru.md">Русская документация</a> ·
-    <a href="./docs/README.ja.md">日本語ドキュメント</a>
-  </p>
-</div>
+> **Based on [WebSpeak](https://github.com/EchoSixHIYA/WebSpeak-client-for-TeamSpeak) by EchoSixHIYA.** TS6 Backstage is a modified fork of that project. All credit for the original code goes to its author.
 
-## 项目简介 · Overview
+---
 
-| 逻辑 | 中文 | English |
-| --- | --- | --- |
-| **WHAT** | WebSpeak 是一个可自行部署的 TeamSpeak 3 / TeamSpeak 6 网页客户端与语音网关。 | WebSpeak is a self-hosted browser client and voice gateway for TeamSpeak 3 and TeamSpeak 6. |
-| **WHY** | 无需安装桌面客户端，用户打开网页即可加入频道；部署者仍然掌控目标服务器、访问策略和数据。 | Users can join a voice channel from a browser without installing a desktop client, while the operator keeps control of servers, access, and data. |
-| **HOW** | 部署后在管理员控制台配置 TeamSpeak 目标和访问方式，浏览器负责交互与音频，WebSpeak 负责网关连接。 | Configure the TeamSpeak target and access policy in the administration console. The browser handles interaction and audio; WebSpeak provides the gateway connection. |
+## What it does
 
-## 文档 · Documentation
+- **Voice in the browser:** Opus audio, push-to-talk or voice activation, mute, mic test, and per-person volume
+- **Full channel tree:** see who's in each channel and move between channels
+- **Chat:** channel, server and private messages, plus pokes and whispers
+- **Share audio:** on desktop, share a window or browser tab's sound with your channel
+- **Invite links:** create links that expire or can be revoked
+- **Admin console:** default server, access rules, sessions, connection history, logs and database backups
+- **Optional low-delay voice (WebRTC)** with automatic fallback
+- **Light and dark themes**, mobile-friendly layout, English / Deutsch / 中文
 
-- [简体中文](./docs/README.zh-CN.md)
-- [English](./docs/README.en.md)
-- [Deutsch](./docs/README.de.md)
-- [Русский](./docs/README.ru.md)
-- [日本語](./docs/README.ja.md)
-- [皮肤开发规范](./docs/SKIN_DEVELOPMENT.md)
-- [WebSpeak 皮肤开发 Agent Skill](./.agents/skills/webspeak-skin-development/SKILL.md)
+---
 
-## 社区 · Community
+## Quick start
 
-<div align="center">
+### Option 1: Docker Compose (Linux)
 
-<a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=yhumUMDD9PmyYFWdXWUb_x7hM5trFQY8&authKey=Pw3HBGT7GwMinTQnuFGfnpf0aRSzXOJKcAiujVP1%2BXMpjheAKrncTRivicBJxpjV&noverify=0&group_code=869500475">
-  <img src="./web/public/qq-group-qr.jpg" alt="WebSpeak QQ 群二维码" width="290" />
-</a>
+```bash
+git clone --depth 1 https://github.com/knkwebservices/ts6-backstage.git
+cd ts6-backstage
+docker compose pull
+docker compose up -d
+```
 
-**QQ群 / QQ group：`869500475`**
+Open `http://<your-host>:3040`. Data is kept in the `webspeak-data` Docker volume.
+Don't run `docker compose down -v`; that deletes the database and admin settings.
 
-[通过群聊链接直接加入 / Join directly](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=yhumUMDD9PmyYFWdXWUb_x7hM5trFQY8&authKey=Pw3HBGT7GwMinTQnuFGfnpf0aRSzXOJKcAiujVP1%2BXMpjheAKrncTRivicBJxpjV&noverify=0&group_code=869500475)
+### Option 2: Windows or Linux package (no Node.js needed)
 
-[Telegram 群组 / Telegram group](https://t.me/+8qShpTcuN9A3MWY9)
+1. Download the `windows-x64.zip` or `linux-x64.tar.gz` package from the [releases page](https://github.com/EchoSixHIYA/WebSpeak-client-for-TeamSpeak/releases/latest).
+2. Extract it to its own folder.
+3. Run `start-webspeak.cmd` on Windows or `./start-webspeak.sh` on Linux.
 
-</div>
+### Option 3: From source
 
-## 友链项目 · Friend projects
+Requires Node.js 22.5+, Git, Python, Make and a C/C++ build toolchain.
 
-### [NeteaseTSBot](https://github.com/yichen11818/NeteaseTSBot)
+```bash
+npm ci --ignore-scripts
+npm run prepare:sdk
+npm rebuild @discordjs/opus --foreground-scripts
+npm --prefix web ci
+npm --prefix web run build
+npm run build
+npm start
+```
 
-面向 TeamSpeak 3/6 的多平台音乐点播机器人，支持网易云音乐、QQ 音乐和 Bilibili 音频播放，并提供 Web 控制台。<br />
-A multi-platform music bot for TeamSpeak 3/6 with Netease Cloud Music, QQ Music, and Bilibili playback, plus a web console.<br />
-Ein plattformübergreifender Musikbot für TeamSpeak 3/6 mit Netease Cloud Music, QQ Music und Bilibili sowie Webkonsole.
+---
 
-## Contributors · 贡献者
+## First-time setup
 
-感谢提交 PR 的贡献者：
+1. Go to `http://<your-host>:3040/admin`.
+2. Sign in with `admin` / `admin` and **change the password right away** (at least 12 characters).
+3. On the **Servers** page, set your default TeamSpeak server, for example `tgscgo.net#9987`.
+4. Put it behind HTTPS before sharing it publicly. Browsers only allow microphone access on secure pages.
 
-- [LainHE](https://github.com/LainHE) — [PR #2](https://github.com/EchoSixHIYA/WebSpeak-client-for-TeamSpeak/pull/2)：浏览器端报错翻译与提示改造。
+### HTTPS with Caddy
 
-## 许可证 · License · Lizenz · Лицензия · ライセンス
+```caddyfile
+talk.example.com {
+    reverse_proxy 127.0.0.1:3040
+}
+```
 
-WebSpeak 使用 [GNU Affero General Public License v3.0 only](./LICENSE) 发布。你可以使用、研究、修改和再分发本项目；如果修改后的版本通过网络向用户提供服务，需要按照 AGPL-3.0 向这些用户提供对应源代码。
+### Ports
 
-WebSpeak is released under the [GNU Affero General Public License v3.0 only](./LICENSE). If a modified version is offered to users over a network, its corresponding source code must be offered under AGPL-3.0.
+| Port | What it's for |
+| --- | --- |
+| `3040/TCP` | Web page and WebSocket (put this behind your HTTPS proxy) |
+| `40000–40099/UDP` | Only if you turn on WebRTC low-delay voice |
+| `9987/UDP` (outbound) | Connecting to your TeamSpeak server |
 
-WebSpeak wird unter der [GNU Affero General Public License v3.0 only](./LICENSE) veröffentlicht. Bei Bereitstellung einer veränderten Version über ein Netzwerk muss der entsprechende Quellcode unter AGPL-3.0 angeboten werden.
+### Using it with TS6 Roadie
 
-WebSpeak распространяется по лицензии [GNU Affero General Public License v3.0 only](./LICENSE). Если изменённая версия предоставляется пользователям через сеть, соответствующий исходный код должен быть доступен этим пользователям на условиях AGPL-3.0.
+Every Backstage user reaches TeamSpeak from the gateway's IP address. If Roadie's `ipguard` cog is enabled, exempt that IP so web users aren't flagged as clones or for country/VPN checks.
 
-WebSpeak は [GNU Affero General Public License v3.0 only](./LICENSE) の下で公開されています。変更版をネットワーク経由でユーザーに提供する場合は、対応するソースコードを AGPL-3.0 に従ってユーザーに提供する必要があります。
+---
 
-## Star History
+## Requirements and notes
 
-<a href="https://star-history.com/#EchoSixHIYA/WebSpeak-client-for-TeamSpeak&Date">
-  <img src="https://api.star-history.com/svg?repos=EchoSixHIYA/WebSpeak-client-for-TeamSpeak&type=Date" alt="WebSpeak Star History" width="100%" />
-</a>
+- A current Chrome, Edge, Firefox or Safari browser
+- Up to 100 browser users per instance
+- The gateway must be able to reach your TeamSpeak server
+- TS6 Backstage is a community project. It is **not** an official TeamSpeak product; TeamSpeak names and trademarks belong to their owners.
 
-<div align="right"><a href="#readme-top">返回顶部 · Back to top ↑</a></div>
+---
+
+## Credits and license
+
+- **Original project:** [WebSpeak](https://github.com/EchoSixHIYA/WebSpeak-client-for-TeamSpeak) by [EchoSixHIYA](https://github.com/EchoSixHIYA)
+- **TeamSpeak protocol SDK:** [EchoSixHIYA/teamspeak-js](https://github.com/EchoSixHIYA/teamspeak-js)
+- **WebRTC:** [werift](https://github.com/shinyoshiaki/werift-webrtc) (MIT)
+
+**Modification notice:** this fork was modified by K & K Web Services beginning October 2026 (renamed to TS6 Backstage, new README and branding). See the commit history for every change.
+
+Licensed under the [GNU Affero General Public License v3.0 only](LICENSE), the same as the original. If you run a modified version of this software for users over a network, you must offer those users the corresponding source code. The full source of TS6 Backstage is available in this repository.
