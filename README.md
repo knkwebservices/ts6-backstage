@@ -48,7 +48,7 @@ Don't run `docker compose down -v`; that deletes the database and admin settings
 
 1. Download the `windows-x64.zip` or `linux-x64.tar.gz` package from the [releases page](https://github.com/knkwebservices/ts6-backstage/releases/latest). `SHA256SUMS.txt` next to them lets you check the download.
 2. Extract it to its own folder.
-3. Run `start-webspeak.cmd` on Windows or `./start-webspeak.sh` on Linux.
+3. Run `start-backstage.cmd` on Windows or `./start-backstage.sh` on Linux.
 
 ### Option 3: From source
 

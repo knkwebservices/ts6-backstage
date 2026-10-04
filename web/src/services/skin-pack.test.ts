@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { strToU8, zipSync } from "fflate";
 import { importSkinPack, resolveSkinCssAssets, SkinPackError } from "./skin-pack.js";
-import { scopeBuiltinThemeForCustomSkin } from "./skin-cascade.js";
+import { boostCustomSkinCss, scopeBuiltinBaseForCustomSkin, scopeBuiltinThemeForCustomSkin } from "./skin-cascade.js";
 
 const manifest = {
   schemaVersion: 1,
@@ -127,6 +127,17 @@ test("skins may recolor the --ws- color tokens and pick the dark base, but not o
   const dark = await importSkinPack(makeSkin(':root { --ws-text: #fff; }', undefined, { base: "dark" }));
   assert.equal(dark.base, "dark");
   await assert.rejects(importSkinPack(makeSkin(':root { --ws-text: #fff; }', undefined, { base: "neon" })), (error: unknown) => error instanceof SkinPackError && error.code === "SKIN_MANIFEST_INVALID");
+});
+
+test("a dark-base skin keeps the night skin's full specificity so it beats the light component styles", async () => {
+  const darkCss = await readFile(new URL("../skins/builtin/dark/skin.css", import.meta.url), "utf8");
+  const scoped = scopeBuiltinBaseForCustomSkin(darkCss, "dark", "community.tgsc");
+  assert.match(scoped, /^\.ws-skin-root\[data-ws-skin="community\.tgsc"\] \.app-shell,/m);
+  assert.doesNotMatch(scoped, /data-ws-skin="builtin\.dark"|:where/);
+  assert.equal(
+    boostCustomSkinCss('.ws-skin-root[data-ws-skin="community.tgsc"] [data-ws-part="home"] { color: red; }', "community.tgsc"),
+    '.ws-skin-root.ws-skin-root[data-ws-skin="community.tgsc"] [data-ws-part="home"] { color: red; }',
+  );
 });
 
 test("the TGSC example imports on the dark base with its logo", async () => {

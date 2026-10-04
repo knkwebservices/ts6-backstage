@@ -64,7 +64,7 @@
   border-color: rgba(227, 38, 43, .3);
 }
 
-[data-ws-part="home.hero.title"] em {
+[data-ws-part="home"] [data-ws-part="home.hero.title"] em {
   color: var(--skin-tgsc-red);
   text-shadow: var(--skin-tgsc-glow);
 }
@@ -166,4 +166,15 @@
   [data-ws-part="voice.activity.artwork"] {
     background-image: none;
   }
+}
+
+/* Header details: steel instead of teal. */
+[data-ws-part="home.header-tools"] > span {
+  color: var(--skin-tgsc-steel);
+  border-color: var(--ws-border);
+  background: var(--ws-surface-2);
+}
+
+[data-ws-part="home.identity"] summary {
+  color: var(--skin-tgsc-steel);
 }

@@ -4,6 +4,11 @@
 
 These are the changes in this fork. The upstream WebSpeak entries follow below.
 
+### 0.2.5-backstage.4 (2026-10-04)
+- Fix: skins built on the Night skin (`"base": "dark"`) now make the voice room dark too. It was showing the light background.
+- TGSC skin 1.0.1: steel version badge and identity link instead of teal.
+- Release downloads are named `ts6-backstage-v...-windows-x64.zip` / `-linux-x64.tar.gz`, and the start scripts are `start-backstage.cmd` / `start-backstage.sh`.
+
 ### 0.2.5-backstage.3 (2026-10-04)
 - The visible name is now "Backstage" everywhere (admin console, page titles, demo, the gateway's probe client, new-install site name). Credits to WebSpeak stay.
 - English (and German, Russian, Japanese) for text that was still Chinese-only: the voice room's event log (joins, leaves, moves, pokes, channel changes) and the default screen-share names.

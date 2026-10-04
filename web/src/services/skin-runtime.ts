@@ -1,7 +1,7 @@
 import { getInstalledSkin, saveInstalledSkin } from "./local-persistence.js";
 import type { InstalledSkin } from "./skin-pack.js";
 import { applyTheme, getBuiltinSkinCss, getStoredTheme, isDarkTheme } from "./theme.js";
-import { scopeBuiltinThemeForCustomSkin } from "./skin-cascade.js";
+import { boostCustomSkinCss, scopeBuiltinBaseForCustomSkin } from "./skin-cascade.js";
 import { getBundledSkinPackageUrl, isPublicSkinEnabled } from "./skin-catalog.js";
 
 export const ACTIVE_SKIN_KEY = "webspeak:active-skin";
@@ -79,7 +79,7 @@ export async function activateSkin(id: string, expectedVersion?: string, appVers
     }
     baseStyle.dataset.skinPackage = skin.id;
     const base = skin.base === "dark" ? "dark" : "light";
-    baseStyle.textContent = scopeBuiltinThemeForCustomSkin(getBuiltinSkinCss(base), base, skin.id);
+    baseStyle.textContent = scopeBuiltinBaseForCustomSkin(getBuiltinSkinCss(base), base, skin.id);
     document.querySelectorAll<HTMLElement>(".ws-skin-root").forEach((clientRoot) => {
       clientRoot.dataset.wsSkin = skin!.id;
     });
@@ -92,7 +92,7 @@ export async function activateSkin(id: string, expectedVersion?: string, appVers
       document.head.append(style);
     }
     style.dataset.skinPackage = skin.id;
-    style.textContent = compiled.css;
+    style.textContent = base === "dark" ? boostCustomSkinCss(compiled.css, skin.id) : compiled.css;
     const previousAssetUrls = activeAssetUrls;
     activeAssetUrls = compiled.objectUrls;
     previousAssetUrls.forEach((url) => URL.revokeObjectURL(url));

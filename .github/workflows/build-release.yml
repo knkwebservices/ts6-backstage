@@ -60,7 +60,7 @@ jobs:
         run: |
           $ErrorActionPreference = "Stop"
           $releaseVersion = $env:RELEASE_REF -replace '^v', ''
-          $packageName = "webspeak-webclient-v$releaseVersion-windows-x64"
+          $packageName = "ts6-backstage-v$releaseVersion-windows-x64"
           $packageRoot = Join-Path $env:RUNNER_TEMP $packageName
           $runtimeRoot = Split-Path -Parent (Get-Command node).Source
           New-Item -ItemType Directory -Path $packageRoot | Out-Null
@@ -79,10 +79,10 @@ jobs:
           "%~dp0runtime\node.exe" "%~dp0dist\index.js"
           if errorlevel 1 (
             echo.
-            echo WebSpeak stopped with an error. Check data\logs for details.
+            echo Backstage stopped with an error. Check data\logs for details.
             pause
           )
-          '@ | Set-Content -LiteralPath (Join-Path $packageRoot "start-webspeak.cmd") -Encoding ascii
+          '@ | Set-Content -LiteralPath (Join-Path $packageRoot "start-backstage.cmd") -Encoding ascii
 
           $smokeRoot = Join-Path $env:RUNNER_TEMP ($packageName + "-smoke")
           Copy-Item -Recurse -LiteralPath $packageRoot -Destination $smokeRoot
@@ -113,7 +113,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: windows-x64
-          path: webspeak-webclient-v*-windows-x64.zip
+          path: ts6-backstage-v*-windows-x64.zip
           if-no-files-found: error
           compression-level: 0
 
@@ -151,7 +151,7 @@ jobs:
         run: |
           set -euo pipefail
           release_version="${RELEASE_REF#v}"
-          package_name="webspeak-webclient-v${release_version}-linux-x64"
+          package_name="ts6-backstage-v${release_version}-linux-x64"
           package_root="$RUNNER_TEMP/$package_name"
           runtime_root="$(dirname "$(dirname "$(command -v node)")")"
           mkdir -p "$package_root/web" "$package_root/runtime"
@@ -162,13 +162,13 @@ jobs:
           cp "$runtime_root/bin/node" "$package_root/runtime/node"
           cp "$runtime_root/LICENSE" "$package_root/runtime/NODE-LICENSE"
           chmod 0755 "$package_root/runtime/node"
-          cat > "$package_root/start-webspeak.sh" <<'LAUNCHER'
+          cat > "$package_root/start-backstage.sh" <<'LAUNCHER'
           #!/usr/bin/env sh
           set -eu
           cd -- "$(dirname -- "$0")"
           exec "$PWD/runtime/node" "$PWD/dist/index.js"
           LAUNCHER
-          chmod 0755 "$package_root/start-webspeak.sh"
+          chmod 0755 "$package_root/start-backstage.sh"
 
           smoke_root="$RUNNER_TEMP/${package_name}-smoke"
           cp -a "$package_root" "$smoke_root"
@@ -201,7 +201,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: linux-x64
-          path: webspeak-webclient-v*-linux-x64.tar.gz
+          path: ts6-backstage-v*-linux-x64.tar.gz
           if-no-files-found: error
           compression-level: 0
 
