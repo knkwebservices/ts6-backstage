@@ -11,7 +11,7 @@ permissions:
   packages: write
 
 env:
-  IMAGE_NAME: ghcr.io/echosixhiya/webspeak
+    IMAGE_NAME: ghcr.io/knkwebservices/ts6-backstage
 
 jobs:
   publish:
