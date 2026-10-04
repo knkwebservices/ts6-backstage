@@ -113,7 +113,7 @@ Every Backstage user reaches TeamSpeak from the gateway's IP address. If Roadie'
 
 ## Requirements and notes
 
-- **Chrome or Edge** (version 94 or newer) are recommended and tested. Firefox works. Safari and iPhone/iPad are still being tested: iOS may stop audio when the tab goes to the background, so keep the page in front.
+- **Chrome or Edge** (version 94 or newer) are recommended. Firefox works, and so does Safari on iPhone (tested October 2026). On iPhone, keep the page in front: iOS may pause audio when the tab goes to the background.
 - Push-to-talk only works while the Backstage tab has focus (a browser limit, the same as Discord in a browser). Use voice activation if you want to talk while in a game.
 - Up to 100 browser users per instance
 - The gateway must be able to reach your TeamSpeak server
