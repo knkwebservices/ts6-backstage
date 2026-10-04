@@ -1223,3 +1223,6 @@
     padding: 10px 12px;
   }
 }
+/* TS6 Backstage: AGPL source link in the settings footer */
+.settings-source-link { margin-right: auto; align-self: center; color: #7a8a85; font-size: 10px; text-decoration: none; }
+.settings-source-link:hover { color: #006a64; text-decoration: underline; }

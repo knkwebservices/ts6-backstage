@@ -1,5 +1,23 @@
 # Changelog
 
+## TS6 Backstage changes
+
+These are the changes in this fork. The upstream WebSpeak entries follow below.
+
+### 0.2.5-backstage.2 (2026-10-04)
+- "Source code (AGPL-3.0)" links in the join page footer, the settings window and the admin console sidebar, so everyone using the site can find the source (AGPL-3.0 section 13).
+- `docker-compose.yml` now pulls this fork's image (`ghcr.io/knkwebservices/ts6-backstage`) by default.
+- Tagged releases now get the Windows and Linux packages and a `SHA256SUMS.txt` attached automatically.
+- README: this fork's download links, five languages, honest browser notes (Chrome/Edge recommended, Safari/iOS being tested, push-to-talk needs the tab focused), lock-to-your-server and admin password advice, security headers and an optional admin IP allowlist for Caddy, and a dated list of fork changes.
+
+### 0.2.5-backstage.1 (2026-10-03)
+- Renamed to TS6 Backstage, with a new README and banner.
+- TGSC defaults: dark (Night) skin for new visitors, page title "TGSC Voice".
+- Removed upstream's QQ, Bilibili, changelog and admin-console header links; the GitHub link points to this fork.
+- The join rate limit uses the visitor's real IP (`X-Forwarded-For`) when the request comes from a local reverse proxy.
+- Site icon renamed to an ASCII filename (Windows unzip garbled the original name).
+- The Docker workflow publishes `ghcr.io/knkwebservices/ts6-backstage`.
+
 ## [0.2.5] — 2026-09-27（相对 0.2.4）
 
 ### 中文

@@ -1,6 +1,6 @@
 services:
   webspeak:
-    image: ${WEBSPEAK_IMAGE:-ghcr.io/echosixhiya/webspeak:latest}
+    image: ${WEBSPEAK_IMAGE:-ghcr.io/knkwebservices/ts6-backstage:latest}
     pull_policy: missing
     restart: unless-stopped
     # WebSpeak needs to reach a TeamSpeak server running on the same host.
