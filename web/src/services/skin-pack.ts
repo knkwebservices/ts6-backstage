@@ -62,6 +62,8 @@ export interface SkinManifest {
   content?: string;
   minAppVersion: string;
   preview?: string;
+  /** Built-in skin used underneath this one (default "light"). */
+  base?: "light" | "dark";
 }
 
 export interface SkinFeatureCopy {
@@ -93,6 +95,9 @@ export interface InstalledSkin extends SkinManifest {
   warnings: string[];
   installedAt: number;
 }
+
+/** Base color tokens a skin may recolor. They only hold colors, so they cannot change layout. */
+const SKIN_COLOR_TOKENS = /^--ws-(?:page-bg|surface-1|surface-2|text|text-muted|accent|success|warning|danger|border)$/i;
 
 export class SkinPackError extends Error {
   constructor(message: string, readonly code: string) {
@@ -341,6 +346,8 @@ function parseManifest(bytes: Uint8Array): SkinManifest {
   if (!entry.toLowerCase().endsWith(".css") || (content && !content.toLowerCase().endsWith(".json")) || (preview && !assetMimeType(preview)?.startsWith("image/"))) throw new SkinPackError("The entry must be CSS, content must be JSON, and preview must be a supported image.", "SKIN_MANIFEST_INVALID");
   const declaredFiles = ["manifest.json", entry, ...(content ? [content] : []), ...(preview ? [preview] : [])].map((item) => item.toLowerCase());
   if (new Set(declaredFiles).size !== declaredFiles.length) throw new SkinPackError("Manifest files must use separate package paths.", "SKIN_MANIFEST_INVALID");
+  if (raw.base != null && raw.base !== "light" && raw.base !== "dark") throw new SkinPackError("manifest.json base must be \"light\" or \"dark\".", "SKIN_MANIFEST_INVALID");
+  const base = raw.base as "light" | "dark" | undefined;
   return {
     schemaVersion: 1,
     id,
@@ -353,6 +360,7 @@ function parseManifest(bytes: Uint8Array): SkinManifest {
     content,
     minAppVersion,
     preview,
+    ...(base ? { base } : {}),
   };
 }
 
@@ -512,8 +520,8 @@ function compileSkinCss(source: string, id: string, assets: Record<string, Blob>
     const canHideTarget = owningRule
       ? hideableRules.has(owningRule) || Boolean(keyframesRule && optionalOnlyKeyframes.has(keyframesRule.params.trim()))
       : false;
-    if (property.startsWith("--") && !/^--skin-[a-z0-9_-]+$/i.test(property)) {
-      throw declaration.error("Custom skin variables must use the --skin- prefix so they cannot replace WebSpeak's structural tokens.");
+    if (property.startsWith("--") && !/^--skin-[a-z0-9_-]+$/i.test(property) && !SKIN_COLOR_TOKENS.test(property)) {
+      throw declaration.error("Custom skin variables must use the --skin- prefix (or be one of the --ws- color tokens) so they cannot replace Backstage's structural tokens.");
     }
     if (isLayoutAffectingProperty(property)) {
       throw declaration.error("Skin CSS may change component artwork and appearance, but must not change layout, positioning, sizing, text flow, or interaction geometry.");

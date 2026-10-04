@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "id": "community.tgsc",
+  "name": "TGSC",
+  "version": "1.0.0",
+  "author": "K&K Web Services",
+  "license": "All rights reserved",
+  "description": "Dark TGSC skin: black and steel surfaces, red accents, and the TGSC reaper logo.",
+  "entry": "skin.css",
+  "preview": "assets/preview.webp",
+  "base": "dark",
+  "minAppVersion": "0.2.5"
+}

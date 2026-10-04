@@ -105,6 +105,10 @@ Optional: allow the admin console only from your own address by adding this insi
 | `40000–40099/UDP` | Only if you turn on WebRTC low-delay voice |
 | `9987/UDP` (outbound) | Connecting to your TeamSpeak server |
 
+### Custom skins
+
+Admins can import `.wskin` skin packages under **Admin → Skins → Import skin package**, then set one as the default. [`docs/examples/tgsc.wskin`](docs/examples/tgsc.wskin) is a dark example with a logo (source in [`docs/examples/tgsc`](docs/examples/tgsc)). A skin can set `"base": "dark"` in its `manifest.json` to build on the Night skin, and can recolor the `--ws-page-bg`, `--ws-surface-1`, `--ws-surface-2`, `--ws-text`, `--ws-text-muted`, `--ws-accent`, `--ws-success`, `--ws-warning`, `--ws-danger` and `--ws-border` color tokens. The full guide is [`docs/SKIN_DEVELOPMENT.md`](docs/SKIN_DEVELOPMENT.md).
+
 ### Using it with TS6 Roadie
 
 Every Backstage user reaches TeamSpeak from the gateway's IP address. If Roadie's `ipguard` cog is enabled, exempt that IP so web users aren't flagged as clones or for country/VPN checks.
@@ -113,7 +117,8 @@ Every Backstage user reaches TeamSpeak from the gateway's IP address. If Roadie'
 
 ## Requirements and notes
 
-- **Chrome or Edge** (version 94 or newer) are recommended and tested. Firefox works. Safari and iPhone/iPad are still being tested: iOS may stop audio when the tab goes to the background, so keep the page in front.
+- **Chrome or Edge** (version 94 or newer) are recommended and tested. Firefox works.
+- **iPhone and iPad** work (tested in Safari). iOS pauses the microphone and sound while you are on another tab or app, and both come back on their own when you return to the Backstage tab. To stay in voice with the screen off or while using other apps, use the TeamSpeak 6 app instead.
 - Push-to-talk only works while the Backstage tab has focus (a browser limit, the same as Discord in a browser). Use voice activation if you want to talk while in a game.
 - Up to 100 browser users per instance
 - The gateway must be able to reach your TeamSpeak server

@@ -1,0 +1,169 @@
+/* TGSC: built on the dark base, recolored black / steel / red, with the TGSC logo. */
+:root {
+  color-scheme: dark;
+  --ws-page-bg: #0b0b0d;
+  --ws-surface-1: #141417;
+  --ws-surface-2: #1d1d22;
+  --ws-text: #ededf0;
+  --ws-text-muted: #a3a3ad;
+  --ws-accent: #e3262b;
+  --ws-success: #5fd27a;
+  --ws-warning: #e2b36c;
+  --ws-danger: #ff6b6b;
+  --ws-border: #2e2e35;
+  --skin-tgsc-red: #e3262b;
+  --skin-tgsc-red-dark: #9e1418;
+  --skin-tgsc-steel: #c9c9cf;
+  --skin-tgsc-glow: 0 0 22px rgba(227, 38, 43, .28);
+}
+
+/* Home page: dark backdrop with the logo faded in behind the hero text. */
+[data-ws-part="home"] {
+  color: var(--ws-text);
+  background-color: var(--ws-page-bg);
+  background-image:
+    radial-gradient(ellipse at 18% 30%, rgba(227, 38, 43, .16), transparent 45%),
+    radial-gradient(ellipse at 85% 85%, rgba(201, 201, 207, .07), transparent 40%),
+    linear-gradient(rgba(11, 11, 13, .82), rgba(11, 11, 13, .82)),
+    url("assets/tgsc-logo.webp");
+  background-position: center, center, center, 30% 55%;
+  background-repeat: no-repeat;
+  background-size: cover, cover, cover, auto 78%;
+}
+
+[data-ws-part="home.header"] {
+  border-color: var(--ws-border);
+  background: rgba(20, 20, 23, .88);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .45);
+}
+
+[data-ws-part="home.brand"] strong {
+  color: var(--ws-text);
+}
+
+[data-ws-part="home.feature"] > span:first-child {
+  color: var(--skin-tgsc-red);
+  background: rgba(227, 38, 43, .12);
+}
+
+[data-ws-part="home.visitors"] {
+  color: var(--skin-tgsc-steel);
+  border-color: rgba(227, 38, 43, .45);
+  background: linear-gradient(110deg, rgba(29, 29, 34, .95), rgba(20, 20, 23, .85));
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .35);
+}
+
+[data-ws-part="home.visitors"] > span:nth-child(2) {
+  background: linear-gradient(135deg, var(--skin-tgsc-red-dark), var(--skin-tgsc-red));
+  box-shadow: var(--skin-tgsc-glow);
+}
+
+[data-ws-part="home.visitors"] > span:first-child,
+[data-ws-part="home.visitors"] > span:last-child {
+  color: var(--skin-tgsc-red);
+  border-color: rgba(227, 38, 43, .3);
+}
+
+[data-ws-part="home.hero.title"] em {
+  color: var(--skin-tgsc-red);
+  text-shadow: var(--skin-tgsc-glow);
+}
+
+[data-ws-part="home.hero.eyebrow"] {
+  color: var(--skin-tgsc-steel);
+}
+
+[data-ws-part="home.feature"] {
+  border-color: var(--ws-border);
+  background: rgba(29, 29, 34, .78);
+}
+
+[data-ws-part="home.join-card"] {
+  border-color: rgba(227, 38, 43, .35);
+  background-color: rgba(20, 20, 23, .95);
+  background-image: url("assets/tgsc-mark.webp");
+  background-position: right 18px top 14px;
+  background-repeat: no-repeat;
+  background-size: 64px auto;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .55), var(--skin-tgsc-glow);
+}
+
+[data-ws-part="home.field"] {
+  border-color: var(--ws-border);
+  background: var(--ws-surface-2);
+}
+
+[data-ws-part="home.connect"] {
+  color: #fff;
+  border-color: var(--skin-tgsc-red-dark);
+  background: linear-gradient(180deg, var(--skin-tgsc-red), var(--skin-tgsc-red-dark));
+  box-shadow: var(--skin-tgsc-glow);
+}
+
+[data-ws-part="home.connect"]:hover {
+  background: linear-gradient(180deg, #f03237, #b3171c);
+}
+
+/* Voice room. */
+[data-ws-part="voice.shell"] {
+  background: var(--ws-page-bg);
+}
+
+[data-ws-part="voice.header"] {
+  border-color: var(--ws-border);
+  background: linear-gradient(105deg, #141417, #1a1114 60%, #141417);
+}
+
+[data-ws-part="voice.activity.artwork"] {
+  background-image: url("assets/tgsc-logo.webp");
+  background-position: right 16px bottom 8px;
+  background-size: auto 140px;
+  opacity: .9;
+}
+
+[data-ws-part="voice.member"][data-ws-speaking="true"] {
+  border-color: var(--skin-tgsc-red);
+  box-shadow: var(--skin-tgsc-glow);
+}
+
+[data-ws-part="voice.chat.message-bubble"] {
+  border-color: var(--ws-border);
+  background: var(--ws-surface-2);
+}
+
+[data-ws-part="voice.chat.message"][data-ws-state="mine"] [data-ws-part="voice.chat.message-bubble"] {
+  color: #fff;
+  border-color: var(--skin-tgsc-red-dark);
+  background: rgba(227, 38, 43, .22);
+}
+
+[data-ws-part="voice.chat.tab"][data-ws-state="active"] {
+  color: #fff;
+  border-color: var(--skin-tgsc-red);
+}
+
+[data-ws-part="skin.option"][data-ws-skin-id="community.tgsc"][role="option"] {
+  border-color: rgba(227, 38, 43, .5);
+}
+
+@media (max-width: 900px) {
+  [data-ws-part="home"] {
+    background-position: center, center, center, center 12%;
+    background-size: cover, cover, cover, auto 46%;
+  }
+
+  [data-ws-part="voice.activity.artwork"] {
+    background-size: auto 110px;
+  }
+}
+
+@media (max-width: 740px) {
+  [data-ws-part="home"] {
+    background-size: cover, cover, cover, 88% auto;
+    background-position: center, center, center, center 120px;
+  }
+
+  [data-ws-part="voice.activity.artwork"] {
+    background-image: none;
+  }
+}

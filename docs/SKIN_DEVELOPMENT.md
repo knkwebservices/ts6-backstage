@@ -115,6 +115,10 @@ assets/brand.woff2            # 可选：自带字体
 
 也可以写 `:root { --skin-accent: ... }` 设置皮肤自己的变量；`:root` 会被转换成当前皮肤根。选择器必须包含 `:root`、`[data-ws-page]` 或 `[data-ws-part]`。不要写 `:global()`、`html`、`body` 或 Vue 内部 class 作为公开接口。组件 class 可能随版本调整，`data-ws-part` 才是皮肤作者接口。自定义变量名必须使用 `--skin-` 前缀，不能覆盖 WebSpeak 的内部令牌。
 
+例外：皮肤可以重新设置以下颜色令牌：`--ws-page-bg`、`--ws-surface-1`、`--ws-surface-2`、`--ws-text`、`--ws-text-muted`、`--ws-accent`、`--ws-success`、`--ws-warning`、`--ws-danger`、`--ws-border`。在 `manifest.json` 中写 `"base": "dark"` 可以让皮肤基于夜间模式（默认是 `"light"`）。
+
+> **TS6 Backstage:** a skin may recolor the `--ws-` color tokens listed above, and `"base": "dark"` in `manifest.json` builds it on the Night skin instead of the light one (the default). See `docs/examples/tgsc` for an example.
+
 页面根节点使用 `data-ws-page` 区分 `home`、`voice` 和 `demo`。使用 `data-ws-state` 选择明确状态，如 `active`、`idle`、`current`、`open`、`closed`、`drag-over`、`dragging`、`speaking`、`connected`、`self`、`mine` 或 `other`。语音成员还提供 `data-ws-speaking="true|false"` 和 `data-ws-self="true|false"`。交互元素会带有 `data-ws-critical="true"`；没有专属部件名称的按钮、链接、输入框、滑块和可拖动成员会使用通用部件 `data-ws-part="control"`，并以 `data-ws-control-kind` 标出 `button`、`link`、`input`、`checkbox`、`range`、`select`、`textarea`、`menuitem` 或 `draggable`。
 
 ### 已发布的部件名称

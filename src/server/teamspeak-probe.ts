@@ -55,7 +55,7 @@ export async function probeTeamSpeak(
   logger: Logger,
   factory: ProbeAdapterFactory = ({ target: probeTarget, password: probePassword, logger: probeLogger }) =>
     (() => {
-      const client = new TSClient({ target: probeTarget, nickname: "WebSpeak Probe", serverPassword: probePassword }, probeLogger);
+      const client = new TSClient({ target: probeTarget, nickname: "Backstage Probe", serverPassword: probePassword }, probeLogger);
       return {
         connect: () => client.connect(),
         disconnect: () => client.disconnect(),

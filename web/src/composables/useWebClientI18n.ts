@@ -52,8 +52,8 @@ function localizedMessage(message: string) {
     "当前浏览器不支持扬声器设备选择，将使用默认输出设备": "Output device selection is not supported by this browser. Using the default output device",
     "所选扬声器当前不可用": "The selected speaker is not available",
     "连接服务器失败，请检查邀请链接或服务器状态": "Could not connect. Check the invite link or server status",
-    "请求来源不受信任，请从正确的网站入口重新打开": "The request origin is not trusted. Reopen the official WebSpeak page",
-    "WebSpeak 尚未完成配置，请联系管理员": "WebSpeak has not been configured yet. Contact the administrator",
+    "请求来源不受信任，请从正确的网站入口重新打开": "The request origin is not trusted. Reopen the official Backstage page",
+    "WebSpeak 尚未完成配置，请联系管理员": "Backstage has not been configured yet. Contact the administrator",
     "请求过于频繁，请稍后重试": "Too many requests. Try again shortly",
     "当前中继加速不可用，请关闭加速或联系管理员": "The selected relay is unavailable. Turn off relay mode or contact the administrator",
     "邀请链接已失效或已被撤销": "The invite link is invalid, expired, or revoked",
@@ -75,7 +75,7 @@ function localizedMessage(message: string) {
     "TeamSpeak 连接失败，请检查地址、网络或服务器状态": "TeamSpeak connection failed. Check the address, network, or server status",
     "服务器当前已满，请稍后重试": "The server is full. Try again shortly",
     "服务器当前已满或拒绝了连接，请稍后重试": "The server is full or rejected the connection. Try again shortly",
-    "WebSpeak 尚未配置 TeamSpeak 目标。": "The WebSpeak TeamSpeak target has not been configured",
+    "WebSpeak 尚未配置 TeamSpeak 目标。": "The Backstage TeamSpeak target has not been configured",
     "此 TeamSpeak 服务器地址不允许连接": "This TeamSpeak server address is not allowed",
     "请输入有效的昵称": "Enter a valid nickname",
     "消息格式无效": "The message format is invalid",
@@ -144,8 +144,8 @@ function localizedMessage(message: string) {
       "当前浏览器不支持麦克风访问": "Dieser Browser unterstützt keinen Mikrofonzugriff",
       "当前浏览器不支持 Web Audio 音频处理": "Dieser Browser unterstützt keine Web-Audio-Verarbeitung",
       "连接服务器失败，请检查邀请链接或服务器状态": "Verbindung fehlgeschlagen. Prüfe den Einladungslink oder den Serverstatus",
-      "请求来源不受信任，请从正确的网站入口重新打开": "Die Anfragequelle ist nicht vertrauenswürdig. Öffne die offizielle WebSpeak-Seite erneut",
-      "WebSpeak 尚未完成配置，请联系管理员": "WebSpeak wurde noch nicht konfiguriert. Wende dich an den Administrator",
+      "请求来源不受信任，请从正确的网站入口重新打开": "Die Anfragequelle ist nicht vertrauenswürdig. Öffne die offizielle Backstage-Seite erneut",
+      "WebSpeak 尚未完成配置，请联系管理员": "Backstage wurde noch nicht konfiguriert. Wende dich an den Administrator",
       "请求过于频繁，请稍后重试": "Zu viele Anfragen. Versuche es gleich erneut",
       "当前中继加速不可用，请关闭加速或联系管理员": "Das ausgewählte Relay ist nicht verfügbar. Deaktiviere den Relay-Modus oder wende dich an den Administrator",
       "邀请链接已失效或已被撤销": "Der Einladungslink ist ungültig, abgelaufen oder widerrufen",
@@ -272,6 +272,28 @@ function visibleErrorCode(code: string): string {
   return (normalized || "CONNECTION_FAILED").slice(0, 64);
 }
 
-  return { t, localizedMessage, localizedAudioNotice, visibleErrorCode };
+/** The gateway writes its event log in Chinese; show it in the visitor's language. */
+function localizedServerEvent(message: string) {
+  if (language.value === "zh") return message;
+  const lang = language.value as "en" | "de" | "ru" | "ja";
+  const who = (name: string) => (name === "未知用户" ? { en: "Unknown user", de: "Unbekannt", ru: "Неизвестный", ja: "不明なユーザー" }[lang] : name === "用户" ? { en: "Someone", de: "Jemand", ru: "Кто-то", ja: "誰か" }[lang] : name);
+  const rules: [RegExp, (m: RegExpMatchArray) => Record<"en" | "de" | "ru" | "ja", string>][] = [
+    [/^已连接到服务器$/, () => ({ en: "Connected to the server", de: "Mit dem Server verbunden", ru: "Подключено к серверу", ja: "サーバーに接続しました" })],
+    [/^频道「(.*)」已创建$/s, (m) => ({ en: `Channel "${m[1]}" was created`, de: `Kanal „${m[1]}“ wurde erstellt`, ru: `Канал «${m[1]}» создан`, ja: `チャンネル「${m[1]}」が作成されました` })],
+    [/^频道已重命名为「(.*)」$/s, (m) => ({ en: `A channel was renamed to "${m[1]}"`, de: `Ein Kanal wurde in „${m[1]}“ umbenannt`, ru: `Канал переименован в «${m[1]}»`, ja: `チャンネル名が「${m[1]}」に変更されました` })],
+    [/^频道「(.*)」已删除$/s, (m) => ({ en: `Channel "${m[1]}" was deleted`, de: `Kanal „${m[1]}“ wurde gelöscht`, ru: `Канал «${m[1]}» удалён`, ja: `チャンネル「${m[1]}」が削除されました` })],
+    [/^(.*) 加入了服务器$/s, (m) => ({ en: `${who(m[1]!)} joined the server`, de: `${who(m[1]!)} ist dem Server beigetreten`, ru: `${who(m[1]!)} подключился к серверу`, ja: `${who(m[1]!)} がサーバーに参加しました` })],
+    [/^(.*) 离开了服务器$/s, (m) => ({ en: `${who(m[1]!)} left the server`, de: `${who(m[1]!)} hat den Server verlassen`, ru: `${who(m[1]!)} покинул сервер`, ja: `${who(m[1]!)} がサーバーから退出しました` })],
+    [/^(.*) 移动到了其他频道$/s, (m) => ({ en: `${who(m[1]!)} moved to another channel`, de: `${who(m[1]!)} ist in einen anderen Kanal gewechselt`, ru: `${who(m[1]!)} перешёл в другой канал`, ja: `${who(m[1]!)} が別のチャンネルに移動しました` })],
+    [/^(.*) 戳了你一下$/s, (m) => ({ en: `${who(m[1]!)} poked you`, de: `${who(m[1]!)} hat dich angestupst`, ru: `${who(m[1]!)} толкнул вас`, ja: `${who(m[1]!)} があなたをつつきました` })],
+  ];
+  for (const [re, make] of rules) {
+    const m = message.match(re);
+    if (m) return make(m)[lang] ?? make(m).en;
+  }
+  return localizedMessage(message);
+}
+
+  return { t, localizedMessage, localizedAudioNotice, localizedServerEvent, visibleErrorCode };
 
 }

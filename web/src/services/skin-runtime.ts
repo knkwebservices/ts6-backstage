@@ -78,7 +78,8 @@ export async function activateSkin(id: string, expectedVersion?: string, appVers
       document.head.append(baseStyle);
     }
     baseStyle.dataset.skinPackage = skin.id;
-    baseStyle.textContent = scopeBuiltinThemeForCustomSkin(getBuiltinSkinCss("light"), "light", skin.id);
+    const base = skin.base === "dark" ? "dark" : "light";
+    baseStyle.textContent = scopeBuiltinThemeForCustomSkin(getBuiltinSkinCss(base), base, skin.id);
     document.querySelectorAll<HTMLElement>(".ws-skin-root").forEach((clientRoot) => {
       clientRoot.dataset.wsSkin = skin!.id;
     });

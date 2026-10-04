@@ -1498,7 +1498,7 @@ export class VoiceBridge {
         ownerPeerId: `ts-${sourceClientId}`,
         ownerClientId: sourceClientId,
         ownerNickname: params.name || `TeamSpeak 用户 ${sourceClientId}`,
-        name: params.name || "TeamSpeak 屏幕共享",
+        name: params.name || "TeamSpeak screen share",
         audio: params.audio === "1",
         createdAt: Date.now(),
         viewerCount: 0,

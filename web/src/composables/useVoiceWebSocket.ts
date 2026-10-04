@@ -2210,7 +2210,7 @@ export function useVoiceWebSocket() {
       screenShareRequestSequence = (screenShareRequestSequence + 1) % 1_000_000;
       screenSharePendingStartId = `screen-start-${screenShareRequestSequence}`;
       for (const track of stream.getTracks()) track.addEventListener("ended", () => { void stopScreenShare(); }, { once: true });
-      sendScreenShareMessage({ type: "screenShareStart", requestId: screenSharePendingStartId, audio: stream.getAudioTracks().length > 0, name: "我的屏幕" });
+      sendScreenShareMessage({ type: "screenShareStart", requestId: screenSharePendingStartId, audio: stream.getAudioTracks().length > 0, name: "Screen" });
     } catch (error: unknown) {
       if (startGeneration !== screenShareStartGeneration) return;
       screenShareLocalStream?.getTracks().forEach((track) => track.stop());
@@ -2284,7 +2284,7 @@ export function useVoiceWebSocket() {
       ownerPeerId: value.ownerPeerId,
       ...(typeof value.ownerClientId === "number" ? { ownerClientId: value.ownerClientId } : {}),
       ownerNickname: typeof value.ownerNickname === "string" ? value.ownerNickname : "TeamSpeak 用户",
-      name: typeof value.name === "string" ? value.name : "屏幕共享",
+      name: typeof value.name === "string" ? value.name : "Screen share",
       audio: value.audio === true,
       createdAt: typeof value.createdAt === "number" ? value.createdAt : Date.now(),
       viewerCount: typeof value.viewerCount === "number" ? value.viewerCount : 0,

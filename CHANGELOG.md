@@ -4,6 +4,14 @@
 
 These are the changes in this fork. The upstream WebSpeak entries follow below.
 
+### 0.2.5-backstage.3 (2026-10-04)
+- The visible name is now "Backstage" everywhere (admin console, page titles, demo, the gateway's probe client, new-install site name). Credits to WebSpeak stay.
+- English (and German, Russian, Japanese) for text that was still Chinese-only: the voice room's event log (joins, leaves, moves, pokes, channel changes) and the default screen-share names.
+- Admin console: the Default skin dropdown is readable in dark mode.
+- Skins can now build on the Night skin (`"base": "dark"` in `manifest.json`) and recolor the `--ws-*` color tokens.
+- New TGSC example skin, `docs/examples/tgsc.wskin`: black and steel with red accents and the TGSC logo.
+- README: how iPhone/iPad audio behaves on other tabs, and a short custom skins section.
+
 ### 0.2.5-backstage.2 (2026-10-04)
 - "Source code (AGPL-3.0)" links in the join page footer, the settings window and the admin console sidebar, so everyone using the site can find the source (AGPL-3.0 section 13).
 - `docker-compose.yml` now pulls this fork's image (`ghcr.io/knkwebservices/ts6-backstage`) by default.

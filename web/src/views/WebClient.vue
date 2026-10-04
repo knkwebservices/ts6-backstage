@@ -220,7 +220,7 @@
               <div class="section-heading chat-heading" data-ws-part="voice.chat.heading"><div><span class="section-kicker">{{ chatTabLabel }}</span><h2><Icon :name="chatTab === 'server' ? 'server' : chatTab === 'events' ? 'bell' : chatTab === 'private' ? 'message' : 'hash'" :size="20" /> {{ chatTitle }}</h2></div><span class="section-counter">{{ chatTab === 'events' ? t('eventCount', { count: serverEvents.length }) : t('messageCount', { count: visibleChatMessages.length }) }}</span></div>
               <div ref="chatListEl" class="message-list" data-ws-part="voice.chat.messages">
                 <div v-if="chatTab === 'events'">
-                  <article v-for="event in serverEvents" :key="event.id" class="event-row" data-ws-part="voice.chat.event"><time>{{ formatTime(event.timestamp) }}</time><span>{{ event.message }}</span></article>
+                  <article v-for="event in serverEvents" :key="event.id" class="event-row" data-ws-part="voice.chat.event"><time>{{ formatTime(event.timestamp) }}</time><span>{{ localizedServerEvent(event.message) }}</span></article>
                   <div v-if="!serverEvents.length" class="chat-empty" data-ws-part="voice.chat.empty" data-ws-state="events-empty"><div class="chat-empty-icon"><Icon name="bell" :size="24" /></div><strong>{{ t('noEvents') }}</strong><span>{{ t('noEventsLead') }}</span></div>
                 </div>
                 <div v-else-if="!visibleChatMessages.length" class="chat-empty" data-ws-part="voice.chat.empty" data-ws-state="messages-empty"><strong>{{ chatTab === 'private' ? t('privateChatStart') : t('chatStart') }}</strong><span>{{ chatTab === 'private' ? t('privateChatStartLead') : t('chatStartLead') }}</span></div>
@@ -511,7 +511,7 @@ let toastTimer: ReturnType<typeof setTimeout> | undefined;
 const language = ref<Language>(getInitialLanguage());
 const activeSkin = shallowRef<InstalledSkin | null>(null);
 const skinMessageOverrides = computed(() => resolveSkinMessages(activeSkin.value, language.value));
-const { t: translate, localizedMessage, localizedAudioNotice, visibleErrorCode } = useWebClientI18n(language);
+const { t: translate, localizedMessage, localizedAudioNotice, localizedServerEvent, visibleErrorCode } = useWebClientI18n(language);
 function t(key: string, variables: Record<string, string | number> = {}) {
   const template = skinMessageOverrides.value[key];
   // WebSpeak's own locale dictionaries are the complete baseline; a skin only

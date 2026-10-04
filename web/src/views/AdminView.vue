@@ -4,7 +4,7 @@
 
     <main v-else-if="screen === 'change-password'" class="login-page">
       <section class="login-card">
-        <div class="admin-brand centered"><span><Icon name="waveform" :size="24" /></span><div><strong>WebSpeak</strong><small>{{ tr('adminConsole') }}</small></div></div>
+        <div class="admin-brand centered"><span><Icon name="waveform" :size="24" /></span><div><strong>Backstage</strong><small>{{ tr('adminConsole') }}</small></div></div>
         <header><h1>{{ tr('changePasswordTitle') }}</h1><p>{{ tr('changePasswordLead') }}</p></header>
         <form @submit.prevent="changePassword"><div v-if="errorMessage" class="alert error">{{ errorMessage }}</div><label><span>{{ tr('newPassword') }}</span><input v-model="newPassword" type="password" autocomplete="new-password" maxlength="1024" autofocus :placeholder="tr('passwordPlaceholder')" /></label><label><span>{{ tr('confirmPassword') }}</span><input v-model="confirmNewPassword" type="password" autocomplete="new-password" maxlength="1024" /></label><div class="strength"><i :style="{ width: `${passwordStrength}%` }"></i></div><button class="primary-button wide" :disabled="submitting" type="submit"><span v-if="submitting" class="spinner small"></span>{{ tr('savePassword') }}</button></form>
         <p class="security-note">{{ tr('defaultCredentialNotice') }}</p><LanguageSwitcher v-model="language" class="language-link" :menu-label="tr('languageMenu')" @change="persistLanguage" />
@@ -13,7 +13,7 @@
 
     <main v-else-if="screen === 'login'" class="login-page">
       <section class="login-card">
-        <div class="admin-brand centered"><span><Icon name="waveform" :size="24" /></span><div><strong>WebSpeak</strong><small>{{ tr('adminConsole') }}</small></div></div>
+        <div class="admin-brand centered"><span><Icon name="waveform" :size="24" /></span><div><strong>Backstage</strong><small>{{ tr('adminConsole') }}</small></div></div>
         <header><h1>{{ tr('welcomeAdmin') }}</h1><p>{{ tr('loginLead') }}</p></header>
         <form @submit.prevent="login"><div v-if="errorMessage" class="alert error">{{ errorMessage }}</div><label><span>{{ tr('adminUsername') }}</span><input v-model.trim="loginUsername" autocomplete="username" autofocus /></label><label><span>{{ tr('adminPassword') }}</span><input v-model="loginPassword" type="password" autocomplete="current-password" /></label><button class="primary-button wide" :disabled="submitting" type="submit"><span v-if="submitting" class="spinner small"></span>{{ tr('login') }}</button></form>
         <div class="login-actions"><RouterLink to="/" class="home-link"><Icon name="home" :size="15" />{{ tr('backHome') }}</RouterLink><LanguageSwitcher v-model="language" class="language-link" :menu-label="tr('languageMenu')" @change="persistLanguage" /></div>
@@ -22,7 +22,7 @@
 
     <div v-else class="admin-shell">
       <aside class="admin-sidebar">
-        <div class="admin-brand"><span><Icon name="waveform" :size="22" /></span><div><strong>WebSpeak</strong><small>{{ tr('adminConsole') }}</small></div></div>
+        <div class="admin-brand"><span><Icon name="waveform" :size="22" /></span><div><strong>Backstage</strong><small>{{ tr('adminConsole') }}</small></div></div>
         <nav><RouterLink to="/admin" exact-active-class="active"><Icon name="activity" :size="18" />{{ tr('overview') }}</RouterLink><RouterLink to="/admin/server" active-class="active"><Icon name="server" :size="18" />{{ tr('server') }}</RouterLink><RouterLink to="/admin/operations" active-class="active"><Icon name="users" :size="18" />{{ tr('operations') }}</RouterLink><RouterLink to="/admin/skins" active-class="active"><Icon name="compass" :size="18" />{{ tr('skinLibrary') }}</RouterLink></nav>
         <div class="sidebar-bottom"><a href="https://github.com/knkwebservices/ts6-backstage" target="_blank" rel="noreferrer"><Icon name="share" :size="16" />Source code (AGPL-3.0)</a><a href="/" target="_blank"><Icon name="share" :size="16" />{{ tr('openGuest') }}</a><button type="button" @click="logout"><Icon name="door" :size="16" />{{ tr('logout') }}</button></div>
       </aside>
@@ -58,7 +58,7 @@
 
             <details class="settings-card settings-accordion">
               <summary class="settings-accordion-header">
-                <span class="settings-accordion-heading"><strong>{{ tr('accessAndIdentity') }}</strong><small>{{ serverForm.accessMode === 'fixed' ? tr('fixedMode') : tr('openMode') }} · {{ serverForm.siteName || 'WebSpeak' }}</small></span>
+                <span class="settings-accordion-heading"><strong>{{ tr('accessAndIdentity') }}</strong><small>{{ serverForm.accessMode === 'fixed' ? tr('fixedMode') : tr('openMode') }} · {{ serverForm.siteName || 'Backstage' }}</small></span>
                 <Icon name="chevron-down" :size="18" />
               </summary>
               <div class="settings-accordion-content">
@@ -176,7 +176,7 @@ const newPassword = ref("");
 const confirmNewPassword = ref("");
 const testResult = ref<ProbeState | null>(null);
 
-const serverForm = reactive({ address: "", port: "9987", serverPassword: "", passwordAction: "keep" as "keep" | "replace" | "remove", hasPassword: false, accessMode: "fixed" as AccessMode, siteName: "WebSpeak", welcomeText: "", welcomeTextEn: "", welcomeTextDe: "", welcomeTextRu: "", welcomeTextJa: "", welcomeDefaults: { ...DEFAULT_WELCOME_TEXTS }, webRtcEnabled: false, webRtcUdpStart: 40000, webRtcUdpEnd: 40099, relayConfigured: false, relayEnabled: false, relayName: "", relayTarget: "", relayToken: "", relayTokenAction: "keep" as "keep" | "replace" | "remove", hasRelayToken: false, relaySettingsTouched: false, relayNodes: [] as RelayNodeForm[], lastTestAt: null as string | null, lastTestLatencyMs: null as number | null });
+const serverForm = reactive({ address: "", port: "9987", serverPassword: "", passwordAction: "keep" as "keep" | "replace" | "remove", hasPassword: false, accessMode: "fixed" as AccessMode, siteName: "Backstage", welcomeText: "", welcomeTextEn: "", welcomeTextDe: "", welcomeTextRu: "", welcomeTextJa: "", welcomeDefaults: { ...DEFAULT_WELCOME_TEXTS }, webRtcEnabled: false, webRtcUdpStart: 40000, webRtcUdpEnd: 40099, relayConfigured: false, relayEnabled: false, relayName: "", relayTarget: "", relayToken: "", relayTokenAction: "keep" as "keep" | "replace" | "remove", hasRelayToken: false, relaySettingsTouched: false, relayNodes: [] as RelayNodeForm[], lastTestAt: null as string | null, lastTestLatencyMs: null as number | null });
 const welcomeLanguage = ref<WelcomeLanguage>("zh");
 const overview = reactive({ gateway: { version: "", uptimeSeconds: 0 }, teamSpeak: { target: "", status: "unknown", lastTestAt: null as string | null, latencyMs: null as number | null }, sessions: { active: 0, peak: 0, limit: 100 }, recentEvents: [] as Array<{ event: string; createdAt: string }>, legacyConfigImported: false });
 interface AdminSession { id: string; nickname: string; target: string; state: string; createdAt: string; ageSeconds: number; tsClientId: number | null; channelId: string | null; memberCount: number }
@@ -461,7 +461,7 @@ const copy = {
     switchToLightTheme: "Switch to light theme",
     switchToDarkTheme: "Switch to dark theme",
     welcomeAdmin: "Welcome back",
-    loginLead: "Enter the admin account and password to manage this WebSpeak instance.",
+    loginLead: "Enter the admin account and password to manage this Backstage instance.",
     adminPassword: "Admin password",
     login: "Sign in",
     backHome: "Back to home",
@@ -482,14 +482,14 @@ const copy = {
     skinDefaultSaved: "Default skin updated.",
     skinEnabledNotice: "Skin enabled and available to visitors.",
     skinDisabledNotice: "Skin disabled and hidden from visitors.",
-    skinDayDescription: "WebSpeak's default light appearance.",
-    skinNightDescription: "WebSpeak's default dark appearance.",
+    skinDayDescription: "Backstage's default light appearance.",
+    skinNightDescription: "Backstage's default dark appearance.",
     skinIllusiaDescription: "ILLUSIA artwork for the home, voice room, and demo pages.",
     skinLibraryScope: "Skins are offered as visitor-selectable options. Each visitor chooses a skin on the public page; the admin console always keeps its own appearance.",
     skinUpload: "Import skin package",
     skinUploading: "Validating and importing…",
     skinEmpty: "No custom skins yet",
-    skinEmptyLead: "Choose a .wskin package that follows the WebSpeak skin specification.",
+    skinEmptyLead: "Choose a .wskin package that follows the Backstage skin specification.",
     skinAuthor: "Author",
     skinLicense: "License",
     skinMinVersion: "Minimum version",
@@ -546,7 +546,7 @@ const copy = {
     disabledStatus: "Disabled",
     relayNodeCount: "{{count}} nodes",
     webrtcSettings: "WebRTC audio",
-    webrtcLead: "Low-latency voice is provided by this WebSpeak gateway; no extra server is required.",
+    webrtcLead: "Low-latency voice is provided by this Backstage gateway; no extra server is required.",
     webrtcEnabled: "Enable WebRTC",
     webrtcEnabledLead: "Use realtime audio when supported; browsers and networks fall back automatically.",
     webrtcPortRange: "WebRTC UDP port range",
@@ -574,7 +574,7 @@ const copy = {
     relayEnvironmentHint: "The relay uses only the settings saved here. After you disable and save it, visitors will no longer see the relay option.",
     accessMode: "Guest access mode",
     fixedMode: "Only this TeamSpeak server",
-    fixedModeLead: "Guests enter only a nickname; WebSpeak manages the target and password.",
+    fixedModeLead: "Guests enter only a nickname; Backstage manages the target and password.",
     openMode: "Allow other TeamSpeak servers",
     openModeLead: "Guests may enter public TeamSpeak addresses; private and reserved networks are blocked.",
     siteName: "Site display name",
@@ -587,10 +587,10 @@ const copy = {
     latency: "Latency",
     internalPort: "Internal port",
     unknown: "Unknown",
-    legacyImported: "Legacy config.json was imported. WebSpeak is now managed here and the old file is no longer a live configuration source.",
+    legacyImported: "Legacy config.json was imported. Backstage is now managed here and the old file is no longer a live configuration source.",
     gotIt: "Got it",
     systemStatus: "SYSTEM STATUS",
-    everythingRunning: "WebSpeak is running",
+    everythingRunning: "Backstage is running",
     overviewLead: "The management service is available. TeamSpeak reachability reflects the latest connection test.",
     running: "Running",
     gateway: "Gateway",
@@ -698,7 +698,7 @@ const germanCopy = {
   languageMenu: "Sprache",
   languageSwitch: "中文",
   welcomeAdmin: "Willkommen zurück",
-  loginLead: "Melde dich an, um diese WebSpeak-Instanz zu verwalten.",
+  loginLead: "Melde dich an, um diese Backstage-Instanz zu verwalten.",
   adminPassword: "Administratorpasswort",
   login: "Anmelden",
   backHome: "Zur Startseite",
@@ -719,14 +719,14 @@ const germanCopy = {
   skinDefaultSaved: "Standardskin aktualisiert.",
   skinEnabledNotice: "Skin aktiviert und für Besucher verfügbar.",
   skinDisabledNotice: "Skin deaktiviert und für Besucher ausgeblendet.",
-  skinDayDescription: "Das standardmäßige helle WebSpeak-Design.",
-  skinNightDescription: "Das standardmäßige dunkle WebSpeak-Design.",
+  skinDayDescription: "Das standardmäßige helle Backstage-Design.",
+  skinNightDescription: "Das standardmäßige dunkle Backstage-Design.",
   skinIllusiaDescription: "ILLUSIA-Grafiken für Startseite, Sprachraum und Demo.",
   skinLibraryScope: "Skins werden Besuchern zur Auswahl angeboten. Jeder Besucher wählt das Design auf der öffentlichen Seite; die Administrationsoberfläche bleibt unverändert.",
   skinUpload: "Skin-Paket importieren",
   skinUploading: "Wird geprüft und importiert…",
   skinEmpty: "Noch keine benutzerdefinierten Skins",
-  skinEmptyLead: "Wähle ein .wskin-Paket nach der WebSpeak-Skin-Spezifikation aus.",
+  skinEmptyLead: "Wähle ein .wskin-Paket nach der Backstage-Skin-Spezifikation aus.",
   skinAuthor: "Autor",
   skinLicense: "Lizenz",
   skinMinVersion: "Mindestversion",
@@ -817,7 +817,7 @@ const germanCopy = {
   unknown: "Unbekannt",
   gotIt: "Verstanden",
   systemStatus: "SYSTEMSTATUS",
-  everythingRunning: "WebSpeak läuft",
+  everythingRunning: "Backstage läuft",
   overviewLead: "Der Verwaltungsdienst ist verfügbar. Die Erreichbarkeit von TeamSpeak entspricht dem letzten Verbindungstest.",
   running: "Läuft",
   gateway: "Gateway",
@@ -887,7 +887,7 @@ const russianCopy = {
   savePassword: "Сохранить новый пароль",
   languageMenu: "Язык",
   welcomeAdmin: "С возвращением",
-  loginLead: "Войдите, чтобы управлять этим экземпляром WebSpeak.",
+  loginLead: "Войдите, чтобы управлять этим экземпляром Backstage.",
   adminPassword: "Пароль администратора",
   login: "Войти",
   backHome: "На главную",
@@ -908,14 +908,14 @@ const russianCopy = {
   skinDefaultSaved: "Тема по умолчанию обновлена.",
   skinEnabledNotice: "Тема включена и доступна посетителям.",
   skinDisabledNotice: "Тема отключена и скрыта от посетителей.",
-  skinDayDescription: "Стандартное светлое оформление WebSpeak.",
-  skinNightDescription: "Стандартное тёмное оформление WebSpeak.",
+  skinDayDescription: "Стандартное светлое оформление Backstage.",
+  skinNightDescription: "Стандартное тёмное оформление Backstage.",
   skinIllusiaDescription: "Иллюстрации ILLUSIA для главной страницы, голосовой комнаты и демо.",
   skinLibraryScope: "Оформление предлагается посетителям на выбор; каждый выбирает его на публичной странице. Панель администратора сохраняет собственный стиль.",
   skinUpload: "Импортировать пакет оформления",
   skinUploading: "Проверка и импорт…",
   skinEmpty: "Пользовательское оформление ещё не добавлено",
-  skinEmptyLead: "Выберите файл .wskin, соответствующий спецификации WebSpeak.",
+  skinEmptyLead: "Выберите файл .wskin, соответствующий спецификации Backstage.",
   skinAuthor: "Автор",
   skinLicense: "Лицензия",
   skinMinVersion: "Мин. версия",
@@ -977,7 +977,7 @@ const russianCopy = {
   latency: "Задержка",
   internalPort: "Внутренний порт",
   systemStatus: "СОСТОЯНИЕ СИСТЕМЫ",
-  everythingRunning: "WebSpeak работает",
+  everythingRunning: "Backstage работает",
   running: "Работает",
   gateway: "Шлюз",
   activeSessions: "Активные сессии",
@@ -1041,7 +1041,7 @@ const japaneseCopy = {
   savePassword: "新しいパスワードを保存",
   languageMenu: "言語",
   welcomeAdmin: "おかえりなさい",
-  loginLead: "ログインして WebSpeak を管理します。",
+  loginLead: "ログインして Backstage を管理します。",
   adminPassword: "管理者パスワード",
   login: "ログイン",
   backHome: "ホームに戻る",
@@ -1062,14 +1062,14 @@ const japaneseCopy = {
   skinDefaultSaved: "デフォルトスキンを更新しました。",
   skinEnabledNotice: "スキンを有効にし、訪問者に公開しました。",
   skinDisabledNotice: "スキンを無効にし、訪問者の選択肢から隠しました。",
-  skinDayDescription: "WebSpeak の標準ライト外観です。",
-  skinNightDescription: "WebSpeak の標準ダーク外観です。",
+  skinDayDescription: "Backstage の標準ライト外観です。",
+  skinNightDescription: "Backstage の標準ダーク外観です。",
   skinIllusiaDescription: "ホーム、ボイスルーム、デモ用の ILLUSIA アートです。",
   skinLibraryScope: "スキンは訪問者向けの選択肢として公開され、各訪問者が公開ページで選択します。管理画面の外観は変更されません。",
   skinUpload: "スキンパッケージを読み込む",
   skinUploading: "検証・読み込み中…",
   skinEmpty: "カスタムスキンはまだありません",
-  skinEmptyLead: "WebSpeak スキン仕様に準拠した .wskin ファイルを選択してください。",
+  skinEmptyLead: "Backstage スキン仕様に準拠した .wskin ファイルを選択してください。",
   skinAuthor: "作者",
   skinLicense: "ライセンス",
   skinMinVersion: "最低バージョン",
@@ -1131,7 +1131,7 @@ const japaneseCopy = {
   latency: "遅延",
   internalPort: "内部ポート",
   systemStatus: "システム状態",
-  everythingRunning: "WebSpeak は稼働中です",
+  everythingRunning: "Backstage は稼働中です",
   running: "稼働中",
   gateway: "ゲートウェイ",
   activeSessions: "アクティブセッション",
@@ -1825,7 +1825,7 @@ async function parseResponse(response: Response) { const value = await response.
 .skin-default-control{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:15px 17px;background:var(--admin-surface,#fff);border:1px solid var(--admin-border,#dce7e3);border-radius:12px}
 .skin-default-control strong{color:var(--admin-text,#20312d);font-size:13px}
 .skin-default-control p{margin:4px 0 0;color:var(--admin-muted,#687a74);font-size:11px}
-.skin-default-control select{min-width:min(100%,270px);padding:10px 12px;color:var(--admin-text,#20312d);background:var(--admin-input,#fff);border:1px solid var(--admin-border,#dce7e3);border-radius:9px;font:inherit}
+.skin-default-control select{min-width:min(100%,270px);padding:10px 12px;color:var(--admin-text,#20312d);background:var(--admin-field,#fff);border:1px solid var(--admin-border,#dce7e3);border-radius:9px;font:inherit}
 .skin-library-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,360px),1fr));gap:14px;align-content:start}
 .skin-library-card{display:grid;grid-template-columns:minmax(140px,.78fr) minmax(0,1.22fr);min-width:0;overflow:hidden;background:var(--admin-surface,#fff);border:1px solid var(--admin-border,#dce7e3);border-radius:14px;box-shadow:0 6px 20px rgba(20,60,53,.04)}
 .skin-preview{position:relative;display:grid;place-items:center;min-height:180px;overflow:hidden;color:#5f9f97;background:linear-gradient(145deg,#e5f5f1,#f5f8f7)}

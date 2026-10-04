@@ -118,6 +118,28 @@ test("skin content supports localized interface message overrides and includes t
   assert.ok(skin.assets["assets/preview.png"]);
 });
 
+test("skins may recolor the --ws- color tokens and pick the dark base, but not other base tokens", async () => {
+  const skin = await importSkinPack(makeSkin(':root { --ws-page-bg: #0b0b0d; --ws-accent: #e3262b; }'));
+  assert.match(skin.css, /--ws-accent: #e3262b/);
+  assert.equal(skin.base, undefined);
+  await assert.rejects(importSkinPack(makeSkin(':root { --ws-radius: 0; }')), (error: unknown) => error instanceof Error && error.message.includes("--skin- prefix"));
+  await assert.rejects(importSkinPack(makeSkin(':root { --surface-0: #000; }')), (error: unknown) => error instanceof Error && error.message.includes("--skin- prefix"));
+  const dark = await importSkinPack(makeSkin(':root { --ws-text: #fff; }', undefined, { base: "dark" }));
+  assert.equal(dark.base, "dark");
+  await assert.rejects(importSkinPack(makeSkin(':root { --ws-text: #fff; }', undefined, { base: "neon" })), (error: unknown) => error instanceof SkinPackError && error.code === "SKIN_MANIFEST_INVALID");
+});
+
+test("the TGSC example imports on the dark base with its logo", async () => {
+  const bytes = await readFile(new URL("../../../docs/examples/tgsc.wskin", import.meta.url));
+  const skin = await importSkinPack(new File([bytes], "tgsc.wskin", { type: "application/octet-stream" }));
+  assert.equal(skin.id, "community.tgsc");
+  assert.equal(skin.base, "dark");
+  assert.equal(skin.previewBlob?.type, "image/webp");
+  assert.ok(skin.assets["assets/tgsc-logo.webp"]);
+  assert.ok(skin.assets["assets/tgsc-mark.webp"]);
+  assert.match(skin.css, /\.ws-skin-root\[data-ws-skin="community\.tgsc"\] \{[^}]*--ws-accent: #e3262b/);
+});
+
 test("the ILLUSIA visual-only example imports without replacing WebSpeak's base translations", async () => {
   const bytes = await readFile(new URL("../../../docs/examples/illusia-voice.wskin", import.meta.url));
   const skin = await importSkinPack(new File([bytes], "illusia-voice.wskin", { type: "application/octet-stream" }));
@@ -220,9 +242,9 @@ test("homepage motion and room content spacing preserve the ILLUSIA layout", asy
   assert.match(css, /@keyframes join-card-sonar-ring[\s\S]*?transform: scale\(\.6\); opacity: \.62;[\s\S]*?transform: scale\(1\); opacity: 0;/);
 });
 
-function makeSkin(css: string, content?: unknown): File {
+function makeSkin(css: string, content?: unknown, extraManifest: Record<string, unknown> = {}): File {
   const packageFiles: Record<string, Uint8Array> = {
-    "manifest.json": strToU8(JSON.stringify({ ...manifest, ...(content ? { content: "content.json" } : {}), preview: "assets/preview.png" })),
+    "manifest.json": strToU8(JSON.stringify({ ...manifest, ...(content ? { content: "content.json" } : {}), preview: "assets/preview.png", ...extraManifest })),
     "skin.css": strToU8(css),
     "assets/backdrop.png": new Uint8Array([1, 2, 3, 4]),
     "assets/preview.png": new Uint8Array([5, 6, 7, 8]),

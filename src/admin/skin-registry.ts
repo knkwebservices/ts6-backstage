@@ -393,6 +393,7 @@ function parseManifest(bytes: Buffer): ParsedSkinManifest {
   if (!entry.toLowerCase().endsWith(".css") || (content && !content.toLowerCase().endsWith(".json")) || (preview && !imageMime(preview))) throw new SkinRegistryError("The entry must be CSS, content must be JSON, and preview must be a supported image.", "SKIN_MANIFEST_INVALID");
   if (new Set(["manifest.json", entry, ...(content ? [content] : []), ...(preview ? [preview] : [])].map((item) => item.toLowerCase())).size !== 2 + Number(Boolean(content)) + Number(Boolean(preview))) throw new SkinRegistryError("Manifest files must use separate package paths.", "SKIN_MANIFEST_INVALID");
   const description = readOptional("description", 400);
+  if (value.base != null && value.base !== "light" && value.base !== "dark") throw new SkinRegistryError("manifest.json base must be \"light\" or \"dark\".", "SKIN_MANIFEST_INVALID");
   return { id, name: read("name", 80), version, author: read("author", 80), license: read("license", 80), minAppVersion, entry, ...(content ? { content } : {}), ...(preview ? { preview } : {}), ...(description ? { description } : {}) };
 }
 

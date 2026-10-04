@@ -26,7 +26,7 @@ export function useWebClientPublicConfig({
 }: UseWebClientPublicConfigOptions) {
   const accessMode = ref<"fixed" | "open">("fixed");
   const initialized = ref(false);
-  const siteName = ref("WebSpeak");
+  const siteName = ref("Backstage");
   const appVersion = ref("0.2.5");
   const visitorNumber = ref<number | null>(null);
   const visitorTotal = ref<number | null>(null);

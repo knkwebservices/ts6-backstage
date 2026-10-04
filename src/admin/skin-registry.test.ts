@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, rm, writeFile } from "node:fs/promises";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
@@ -85,6 +85,20 @@ test("custom skins can be enabled, disabled, and selected as the instance defaul
   await registry.setDefaultSkin("sample-skin");
   assert.equal(await registry.remove("sample-skin"), true);
   assert.equal(await registry.getDefaultSkinId(), "builtin.light");
+});
+
+test("skin registry accepts the TGSC dark-base example and rejects unknown bases", async (context) => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), "webspeak-skin-registry-"));
+  context.after(() => rm(directory, { recursive: true, force: true }));
+  const registry = new SkinRegistry(directory);
+  const tgsc = await readFile(new URL("../../docs/examples/tgsc.wskin", import.meta.url));
+  const saved = await registry.save(tgsc, "community.tgsc");
+  assert.equal(saved.id, "community.tgsc");
+  const bad = createZip([
+    ["manifest.json", Buffer.from(JSON.stringify({ ...manifest, content: undefined, preview: undefined, base: "neon" }))],
+    ["skin.css", Buffer.from(":root { --ws-text: #fff; }")],
+  ]);
+  await assert.rejects(registry.save(bad, "sample-skin"), (error: unknown) => error instanceof SkinRegistryError && error.code === "SKIN_MANIFEST_INVALID");
 });
 
 test("skin registry rejects path traversal and mismatched local ZIP headers", async (context) => {
