@@ -4,6 +4,11 @@
 
 These are the changes in this fork. The upstream WebSpeak entries follow below.
 
+### 0.2.5-backstage.5 (2026-10-04)
+- No community branding in the download: the page title and icon text use the site name set in the admin console, and the default title is "Backstage".
+- Custom site icon: put `site-icon.png` (or `.jpg`, `.webp`, `.svg`) in the `data` folder and it replaces the default icon on the join page and browser tab.
+- The TGSC example skin was removed from the repository; skins stay something each server imports for itself.
+
 ### 0.2.5-backstage.4 (2026-10-04)
 - Fix: skins built on the Night skin (`"base": "dark"`) now make the voice room dark too. It was showing the light background.
 - TGSC skin 1.0.1: steel version badge and identity link instead of teal.

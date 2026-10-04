@@ -16,7 +16,7 @@
 .join-header { min-height: 84px; display: flex; flex-wrap: wrap; align-content: center; align-items: center; justify-content: space-between; gap: 10px 16px; padding: 0 clamp(12px, 1.4vw, 22px); box-sizing: border-box; }
 .brand-lockup { display: flex; align-items: center; gap: 12px; }
 .brand-mark, .rail-logo { display: grid; place-items: center; color: #fff; background: #006a64; box-shadow: 0 8px 18px rgba(0, 106, 100, .15); }
-.brand-mark { display: block; width: 40px; height: 40px; border-radius: 12px; object-fit: cover; }
+.brand-mark { display: block; width: 40px; height: 40px; border-radius: 12px; object-fit: contain; background: transparent; box-shadow: none; }
 .brand-lockup strong { display: block; color: #006a64; font-size: 18px; letter-spacing: -.04em; }
 .brand-lockup strong span { color: #24312f; font-weight: 500; }
 .brand-lockup small { display: block; margin-top: 2px; color: #7b8885; font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }

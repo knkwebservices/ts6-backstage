@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
@@ -87,13 +87,15 @@ test("custom skins can be enabled, disabled, and selected as the instance defaul
   assert.equal(await registry.getDefaultSkinId(), "builtin.light");
 });
 
-test("skin registry accepts the TGSC dark-base example and rejects unknown bases", async (context) => {
+test("skin registry accepts a dark-base skin and rejects unknown bases", async (context) => {
   const directory = await mkdtemp(path.join(os.tmpdir(), "webspeak-skin-registry-"));
   context.after(() => rm(directory, { recursive: true, force: true }));
   const registry = new SkinRegistry(directory);
-  const tgsc = await readFile(new URL("../../docs/examples/tgsc.wskin", import.meta.url));
-  const saved = await registry.save(tgsc, "community.tgsc");
-  assert.equal(saved.id, "community.tgsc");
+  const dark = createZip([
+    ["manifest.json", Buffer.from(JSON.stringify({ ...manifest, content: undefined, preview: undefined, base: "dark" }))],
+    ["skin.css", Buffer.from(":root { --ws-accent: #e3262b; }")],
+  ]);
+  assert.equal((await registry.save(dark, "sample-skin")).id, "sample-skin");
   const bad = createZip([
     ["manifest.json", Buffer.from(JSON.stringify({ ...manifest, content: undefined, preview: undefined, base: "neon" }))],
     ["skin.css", Buffer.from(":root { --ws-text: #fff; }")],

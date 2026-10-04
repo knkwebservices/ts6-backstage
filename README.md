@@ -70,7 +70,7 @@ npm start
 
 1. Go to `http://<your-host>:3040/admin`.
 2. Sign in with `admin` / `admin` and **change the password right away** (at least 12 characters). Do this before the page is reachable from the internet: until then, anyone who opens `/admin` first can set it.
-3. On the **Servers** page, set your default TeamSpeak server, for example `tgscgo.net#9987`.
+3. On the **Servers** page, set your default TeamSpeak server, for example `ts.example.com#9987`.
 4. **Lock it to your server** (only allow the configured server) unless you really want an open gateway. An open gateway lets anyone use your machine to connect to any TeamSpeak server.
 5. Put it behind HTTPS before sharing it publicly. Browsers only allow microphone access on secure pages.
 
@@ -107,7 +107,9 @@ Optional: allow the admin console only from your own address by adding this insi
 
 ### Custom skins
 
-Admins can import `.wskin` skin packages under **Admin → Skins → Import skin package**, then set one as the default. [`docs/examples/tgsc.wskin`](docs/examples/tgsc.wskin) is a dark example with a logo (source in [`docs/examples/tgsc`](docs/examples/tgsc)). A skin can set `"base": "dark"` in its `manifest.json` to build on the Night skin, and can recolor the `--ws-page-bg`, `--ws-surface-1`, `--ws-surface-2`, `--ws-text`, `--ws-text-muted`, `--ws-accent`, `--ws-success`, `--ws-warning`, `--ws-danger` and `--ws-border` color tokens. The full guide is [`docs/SKIN_DEVELOPMENT.md`](docs/SKIN_DEVELOPMENT.md).
+Admins can import `.wskin` skin packages under **Admin → Skins → Import skin package**, then set one as the default. A skin can set `"base": "dark"` in its `manifest.json` to build on the Night skin, and can recolor the `--ws-page-bg`, `--ws-surface-1`, `--ws-surface-2`, `--ws-text`, `--ws-text-muted`, `--ws-accent`, `--ws-success`, `--ws-warning`, `--ws-danger` and `--ws-border` color tokens. The full guide is [`docs/SKIN_DEVELOPMENT.md`](docs/SKIN_DEVELOPMENT.md).
+
+To use your own logo as the site icon (top-left of the join page and the browser tab), put a `site-icon.png` (or `.jpg`, `.webp`, `.svg`) in the `data` folder. No restart needed; reload the page.
 
 ### Using it with TS6 Roadie
 

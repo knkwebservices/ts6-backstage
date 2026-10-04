@@ -4,7 +4,7 @@
     <section v-if="!voiceState.connected && !voiceState.reconnecting && !voiceState.reconnectFailed" class="join-page" data-ws-part="home">
       <header class="join-header" data-ws-part="home.header">
         <div class="brand-lockup" data-ws-part="home.brand">
-          <img class="brand-mark" src="/site-icon.jpg" alt="TGSC Voice" />
+          <img class="brand-mark" :src="'/site-icon'" :alt="siteName" />
           <div>
             <strong>{{ skinHomeCopy.brandName || siteName }}</strong>
             <small>{{ t('browserWorkspace') }}</small>

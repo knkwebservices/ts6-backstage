@@ -1,7 +1,7 @@
 import express from "express";
 import { createServer as createHttpsServer } from "node:https";
 import { createServer as createHttpServer } from "node:http";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { VoiceBridge, type VoiceBridgeOptions } from "./voice-bridge.js";
 import type { Logger } from "../logger.js";
@@ -21,6 +21,8 @@ export interface WebServerOptions {
   version?: string;
   logFile?: string;
   staticDir?: string;
+  /** Folder checked for a custom site-icon.png/.jpg/.webp/.svg (usually the data folder). */
+  siteIconDir?: string;
   certDir?: string; // path to cert.pem + key.pem for HTTPS
   voiceBridgeOptions: VoiceBridgeOptions;
   adminService: AdminService;
@@ -243,6 +245,16 @@ export function createWebServer(options: WebServerOptions): WebServer {
     logFile: options.logFile,
     startedAt,
   }));
+
+  // Site icon: a site-icon.* file in the data folder replaces the bundled default.
+  app.get("/site-icon", (_req, res) => {
+    for (const ext of ["png", "jpg", "jpeg", "webp", "svg"]) {
+      const custom = options.siteIconDir ? path.join(options.siteIconDir, `site-icon.${ext}`) : "";
+      if (custom && existsSync(custom)) return res.set("Cache-Control", "no-cache").sendFile(custom);
+    }
+    if (options.staticDir) return res.set("Cache-Control", "no-cache").sendFile(path.join(options.staticDir, "site-icon.jpg"));
+    res.status(404).end();
+  });
 
   // Serve static frontend
   if (options.staticDir) {

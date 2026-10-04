@@ -131,24 +131,13 @@ test("skins may recolor the --ws- color tokens and pick the dark base, but not o
 
 test("a dark-base skin keeps the night skin's full specificity so it beats the light component styles", async () => {
   const darkCss = await readFile(new URL("../skins/builtin/dark/skin.css", import.meta.url), "utf8");
-  const scoped = scopeBuiltinBaseForCustomSkin(darkCss, "dark", "community.tgsc");
-  assert.match(scoped, /^\.ws-skin-root\[data-ws-skin="community\.tgsc"\] \.app-shell,/m);
+  const scoped = scopeBuiltinBaseForCustomSkin(darkCss, "dark", "community.midnight");
+  assert.match(scoped, /^\.ws-skin-root\[data-ws-skin="community\.midnight"\] \.app-shell,/m);
   assert.doesNotMatch(scoped, /data-ws-skin="builtin\.dark"|:where/);
   assert.equal(
-    boostCustomSkinCss('.ws-skin-root[data-ws-skin="community.tgsc"] [data-ws-part="home"] { color: red; }', "community.tgsc"),
-    '.ws-skin-root.ws-skin-root[data-ws-skin="community.tgsc"] [data-ws-part="home"] { color: red; }',
+    boostCustomSkinCss('.ws-skin-root[data-ws-skin="community.midnight"] [data-ws-part="home"] { color: red; }', "community.midnight"),
+    '.ws-skin-root.ws-skin-root[data-ws-skin="community.midnight"] [data-ws-part="home"] { color: red; }',
   );
-});
-
-test("the TGSC example imports on the dark base with its logo", async () => {
-  const bytes = await readFile(new URL("../../../docs/examples/tgsc.wskin", import.meta.url));
-  const skin = await importSkinPack(new File([bytes], "tgsc.wskin", { type: "application/octet-stream" }));
-  assert.equal(skin.id, "community.tgsc");
-  assert.equal(skin.base, "dark");
-  assert.equal(skin.previewBlob?.type, "image/webp");
-  assert.ok(skin.assets["assets/tgsc-logo.webp"]);
-  assert.ok(skin.assets["assets/tgsc-mark.webp"]);
-  assert.match(skin.css, /\.ws-skin-root\[data-ws-skin="community\.tgsc"\] \{[^}]*--ws-accent: #e3262b/);
 });
 
 test("the ILLUSIA visual-only example imports without replacing WebSpeak's base translations", async () => {

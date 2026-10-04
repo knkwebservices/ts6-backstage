@@ -59,6 +59,7 @@ export function useWebClientPublicConfig({
       visitorTotal.value = Number.isSafeInteger(config.visitorTotal) && Number(config.visitorTotal) > 0 ? Number(config.visitorTotal) : null;
       initialized.value = config.initialized === true;
       if (typeof config.siteName === "string" && config.siteName.trim()) siteName.value = config.siteName.trim();
+      if (typeof document !== "undefined") document.title = `${siteName.value} · Join TeamSpeak in your browser`;
       if (typeof config.welcomeText === "string") welcomeTexts.zh = config.welcomeText;
       if (typeof config.welcomeTextEn === "string") welcomeTexts.en = config.welcomeTextEn;
       if (config.welcomeTexts && typeof config.welcomeTexts === "object" && !Array.isArray(config.welcomeTexts)) {

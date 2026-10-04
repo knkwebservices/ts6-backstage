@@ -55,6 +55,7 @@ async function main() {
     version: APP_VERSION,
     logFile: path.join(LOG_DIR, "webspeak.log"),
     staticDir: STATIC_DIR,
+    siteIconDir: DATA_DIR,
     certDir: hasCert ? CERT_DIR : undefined,
     voiceBridgeOptions: {
       joinTickets,
